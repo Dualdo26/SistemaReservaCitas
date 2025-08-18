@@ -1,4 +1,11 @@
 
+
+
+using Aplicacion.Interfaces;
+using Aplicacion.Servicios;
+using Infraestructura.Persistencia.Contexto;
+using Infraestructura.Persistencia.Repositorio;
+
 namespace SistemaReservaCitas
 {
     public class Program
@@ -13,6 +20,16 @@ namespace SistemaReservaCitas
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSqlServer<P2Context>(builder.Configuration.GetConnectionString("AppConection"));
+            builder.Services.AddScoped(typeof(IUsuarioRepositorio), typeof(UsuarioRepositorio));
+            builder.Services.AddScoped<UsuarioServicio>();
+
+
+
+
+
+
 
             var app = builder.Build();
 
